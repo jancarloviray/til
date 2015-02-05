@@ -39,4 +39,24 @@ docker run hello-world
 # after it downloads, you’ll be inside
 # the bash shell. `exit` to exit
 docker run -it ubuntu bash
+
+# check docker version
+docker version
+
+# if you are getting a FATA[0000] error
+# your shell might not be provisioned
+$(boot2docker shellinit)
+
+# the latest version of boot2docker
+# sets up a host-only network adapter
+# which provides access to the
+# container’s port. try running an
+# nginx image at port 80
+docker run --rm -i -t -p 80:80 nginx
+
+# get boot2docker IP
+boot2docker ip
+
+# access the image’s port 80
+open $(echo ‘http://’$(boot2docker ip))
 ```
