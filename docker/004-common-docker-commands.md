@@ -10,6 +10,7 @@ A summary of commands I have come across to. Could be a cheatsheet in the future
 - You only typically need 3 characters from [containerID]
 - Append --help if you want more information about the command
 - Note that Containers are not the same as Images. Containers are the instances.
+- If you are using boot2docker, it might cause some issues such as docker server being unresponsive. Restart boot2docker with `boot2docker restart` to fix issues such as DNS and etc.
 
 ## Commands
 
@@ -104,6 +105,15 @@ sudo docker logs -f -t [containerID]
 
 #### Removing a Container
 `sudo docker rm [containerID]`
+
+### Modifying a Container
+---
+
+#### Checking Diff
+`sudo docker diff [containerID]`
+
+#### Commit Changes to Container
+`sudo docker commit -m ‘Added nodejs’ -a ‘John Doe’ [containerID] new/image_name:custom_tag`
 
 ### Container Networking
 ---
