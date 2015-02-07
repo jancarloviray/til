@@ -4,6 +4,13 @@ A summary of commands I have come across to. Could be a cheatsheet in the future
 
 *Note: if you are using Boot2Docker, then do not type sudo otherwise you will get an error*
 
+## Tips
+
+- You can replace [containerID] with [containerName]
+- You only typically need 3 characters from [containerID]
+
+## Commands
+
 ### Check Docker Version
 #####`sudo docker version`
 
@@ -40,8 +47,14 @@ A summary of commands I have come across to. Could be a cheatsheet in the future
 ### List Latest Container
 #####`sudo docker ps -l`
 
-#### Check Container Log
+#### View Container Log
 #####`sudo docker logs [containerID]`
+
+#### Tail Container Log
+#####`sudo docker logs -f [containerID]`
+
+#### Inspect a Container
+#####`sudo docker inspect [containerID]`
 
 ### Stop a Container Running in Background
 #####`sudo docker stop [containerID]`
@@ -66,3 +79,9 @@ This means that Docker has exposed port 5000 (default python flask port) on port
 ##### `sudo docker run -d -p 5000:5000 training/webapp python app.py`
 
 This maps container port 5000 to host port 5000.
+
+### Restarting a Container
+#####`sudo docker restart [containerID]`
+
+### Removing a Container
+#####`sudo docker rm [containerID]`
