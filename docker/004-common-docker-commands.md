@@ -24,7 +24,7 @@ A summary of commands I have come across to. Could be a cheatsheet in the future
 - Note that docker containers are only active so long as the command you specify is active.
 
 ### Name a Container
-####`sudo docker run --name my_app_name ubuntu /bin/echo ‘Hello World’`
+#####`sudo docker run --name my_app_name ubuntu /bin/echo ‘Hello World’`
 
 ### Interactive Container  
 #####`sudo docker run -t -i ubuntu /bin/bash`
@@ -42,7 +42,7 @@ A summary of commands I have come across to. Could be a cheatsheet in the future
 - to peek inside a specific container, run `sudo docker logs [containerIDorName]`
 - to stop running the container, `sudo docker stop [containerIDorName]`. Note that there is a default timer of 10 seconds before the command will actually execute - a grace period just in case you want to change your mind. To override this, use `sudo docker stop -t 0 [containerID]`
 
-### List Running and Stopped Containers
+### List Containers
 ```
 # list only running containers
 sudo docker ps
@@ -57,7 +57,7 @@ sudo docker ps -l
 sudo docker ps -a -s
 ```
 
-### Viewing Container Logs
+### View Container Logs
 ```
 # View Container Log
 sudo docker logs [containerID]
@@ -69,7 +69,7 @@ sudo docker logs -f [containerID]
 sudo docker logs -f -t [containerID]
 ```
 
-#### Inspect a Container
+### Inspect a Container
 #####`sudo docker inspect [containerID]`
 
 ### Stop a Container Running in Background
