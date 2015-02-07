@@ -8,6 +8,7 @@ A summary of commands I have come across to. Could be a cheatsheet in the future
 
 - You can replace [containerID] with [containerName]
 - You only typically need 3 characters from [containerID]
+- Append --help if you want more information about the command
 
 ## Commands
 
@@ -21,6 +22,9 @@ A summary of commands I have come across to. Could be a cheatsheet in the future
 - Next, we specified an image. If it is not installed, it will download it.
 - Next is the command we run inside the container. 
 - Note that docker containers are only active so long as the command you specify is active.
+
+### Name a Container
+####`sudo docker run --name my_app_name ubuntu /bin/echo ‘Hello World’`
 
 ### Interactive Container  
 #####`sudo docker run -t -i ubuntu /bin/bash`
@@ -38,20 +42,32 @@ A summary of commands I have come across to. Could be a cheatsheet in the future
 - to peek inside a specific container, run `sudo docker logs [containerIDorName]`
 - to stop running the container, `sudo docker stop [containerIDorName]`. Note that sometimes it might take a few seconds for the stop process to complete.
 
-### List Running Containers
-#####`sudo docker ps`
-
 ### List Running and Stopped Containers
-#####`sudo docker ps -a`
+```
+# list only running containers
+sudo docker ps
 
-### List Latest Container
-#####`sudo docker ps -l`
+# list all container
+sudo docker ps -a
 
-#### View Container Log
-#####`sudo docker logs [containerID]`
+# show recently created container
+sudo docker ps -l
 
-#### Tail Container Log
-#####`sudo docker logs -f [containerID]`
+# display file sizes (of all containers)
+sudo docker ps -a -s
+```
+
+### Viewing Container Logs
+```
+# View Container Log
+sudo docker logs [containerID]
+
+# View and Tail Container Log
+sudo docker logs -f [containerID]
+
+# Also show Timestamps
+sudo docker logs -f -t [containerID]
+```
 
 #### Inspect a Container
 #####`sudo docker inspect [containerID]`
