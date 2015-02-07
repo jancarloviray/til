@@ -40,7 +40,7 @@ A summary of commands I have come across to. Could be a cheatsheet in the future
 - note that after you run this, you will not see the output but Docker will rather give you the **Container ID**.
 - to see running Containers, run `docker ps`
 - to peek inside a specific container, run `sudo docker logs [containerIDorName]`
-- to stop running the container, `sudo docker stop [containerIDorName]`. Note that sometimes it might take a few seconds for the stop process to complete.
+- to stop running the container, `sudo docker stop [containerIDorName]`. Note that there is a default timer of 10 seconds before the command will actually execute - a grace period just in case you want to change your mind. To override this, use `sudo docker stop -t 0 [containerID]`
 
 ### List Running and Stopped Containers
 ```
