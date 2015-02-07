@@ -34,6 +34,22 @@ A summary of commands I have come across to. Could be a cheatsheet in the future
 #### Search For Available Images
 `sudo docker search [imageName]`
 
+#### Build an Image
+`sudo docker build -t username/imagename:tag .`
+
+- note that `.` assumes there is an existing Dockerfile
+
+#### Setting Tag on Existing Images
+`sudo docker tag [containerID] username/imagename:newtag`
+
+- i think this is better than creating new image names per commit
+
+#### Push Image to Docker Hub
+`sudo docker push username/imagename`
+
+#### Remove Docker Image
+`sudo docker rmi username/imagename`
+
 ### Container Information
 ---
 
