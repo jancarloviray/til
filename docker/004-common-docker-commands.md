@@ -31,7 +31,16 @@ A summary of commands I have come across to. Could be a cheatsheet in the future
 - to peek inside a specific container, run `sudo docker logs [containerIDorName]`
 - to stop running the container, `sudo docker stop [containerIDorName]`. Note that sometimes it might take a few seconds for the stop process to complete.
 
-### List Running Processes
+### List Running Containers
+#####`sudo docker ps`
+
+### List Running and Stopped Containers
+#####`sudo docker ps -a`
+
+### List Latest Container
+#####`sudo docker ps -l`
+
+#### Check Container Log
 #####`sudo docker logs [containerID]`
 
 ### Stop a Container Running in Background
@@ -42,3 +51,11 @@ A summary of commands I have come across to. Could be a cheatsheet in the future
 
 - **-d** runs the container in background
 - **-P** tells Docker to map network ports inside our container to our host
+
+When you run `docker ps` you will see a column like this:
+```
+PORTS
+0.0.0.0:49155->5000/tcp
+```
+
+This means that Docker has exposed port 5000 (default python flask port) on port 49155.
