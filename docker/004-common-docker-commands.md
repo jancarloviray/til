@@ -59,3 +59,10 @@ PORTS
 ```
 
 This means that Docker has exposed port 5000 (default python flask port) on port 49155.
+
+**NOTE: if you are using boot2docker, you will need to get the ip of boot2docker. Instead of running localhost:49155, you must get the port by running `boot2docker ip` or `open $(boot2docker ip):49155`**
+
+### Expose Container Port to Host Manually
+##### `sudo docker run -d -p 5000:5000 training/webapp python app.py`
+
+This maps container port 5000 to host port 5000.
