@@ -9,6 +9,7 @@ A summary of commands I have come across to. Could be a cheatsheet in the future
 - You can replace [containerID] with [containerName]
 - You only typically need 3 characters from [containerID]
 - Append --help if you want more information about the command
+- Note that Containers are not the same as Images. Containers are the instances.
 
 ## Commands
 
@@ -22,25 +23,6 @@ A summary of commands I have come across to. Could be a cheatsheet in the future
 - Next, we specified an image. If it is not installed, it will download it.
 - Next is the command we run inside the container. 
 - Note that docker containers are only active so long as the command you specify is active.
-
-### Name a Container
-#####`sudo docker run --name my_app_name ubuntu /bin/echo ‘Hello World’`
-
-### Interactive Container  
-#####`sudo docker run -t -i ubuntu /bin/bash`
-
-- **-t** assigns a pseudo-tty or terminal inside our new container
-- **-i** flag allows us to make an interactive connection by grabbing the standard in STDIN of the container
-- **/bin/bash** also launches a bash shell inside our container
-
-### Daemonize a Container
-#####`sudo docker run -d ubuntu /bin/sh -c “while true;do echo hello world; sleep 1; done”`
-
-- **-d** tells Docker to run the container and put it in the background, to “daemonize” it
-- note that after you run this, you will not see the output but Docker will rather give you the **Container ID**.
-- to see running Containers, run `docker ps`
-- to peek inside a specific container, run `sudo docker logs [containerIDorName]`
-- to stop running the container, `sudo docker stop [containerIDorName]`. Note that there is a default timer of 10 seconds before the command will actually execute - a grace period just in case you want to change your mind. To override this, use `sudo docker stop -t 0 [containerID]`
 
 ### List Containers
 ```
@@ -71,6 +53,25 @@ sudo docker logs -f -t [containerID]
 
 ### Inspect a Container
 #####`sudo docker inspect [containerID]`
+
+### Name a Container
+#####`sudo docker run --name my_app_name ubuntu /bin/echo ‘Hello World’`
+
+### Interactive Container  
+#####`sudo docker run -t -i ubuntu /bin/bash`
+
+- **-t** assigns a pseudo-tty or terminal inside our new container
+- **-i** flag allows us to make an interactive connection by grabbing the standard in STDIN of the container
+- **/bin/bash** also launches a bash shell inside our container
+
+### Daemonize a Container
+#####`sudo docker run -d ubuntu /bin/sh -c “while true;do echo hello world; sleep 1; done”`
+
+- **-d** tells Docker to run the container and put it in the background, to “daemonize” it
+- note that after you run this, you will not see the output but Docker will rather give you the **Container ID**.
+- to see running Containers, run `docker ps`
+- to peek inside a specific container, run `sudo docker logs [containerIDorName]`
+- to stop running the container, `sudo docker stop [containerIDorName]`. Note that there is a default timer of 10 seconds before the command will actually execute - a grace period just in case you want to change your mind. To override this, use `sudo docker stop -t 0 [containerID]`
 
 ### Stop a Container Running in Background
 #####`sudo docker stop [containerID]`
