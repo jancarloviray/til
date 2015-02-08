@@ -41,7 +41,7 @@ A summary of commands I have come across to. Could be a cheatsheet in the future
 Note that to modify an image, you have to create an instance of that image as a container. You must then run the container, then do your modifications then on. Similar to Git, you have to “commit” your changes. This will “save” the changes you made on that container into the origin image. Then you can push it to docker hub.
 
 #### Build an Image
-`sudo docker build -t username/imagename:tag .`
+`sudo docker build -t [username/imagename:tag] .`
 
 - note that `.` assumes there is an existing Dockerfile
 
@@ -49,13 +49,13 @@ Note that to modify an image, you have to create an instance of that image as a 
 `sudo docker diff [containerID]`
 
 #### Commit Changes to an Image
-`sudo docker commit -m ‘Added nodejs’ -a ‘John Doe’ [containerID] username/new_image_name:custom_tag`
+`sudo docker commit -m ‘Added nodejs’ -a ‘John Doe’ [containerID] [username/new_name:custom_tag]`
 
 #### Setting Tag on Existing Images
-`sudo docker tag [containerID] username/imagename:newtag`
+`sudo docker tag [containerID] [username/imagename:newtag]`
 
 #### Push Image to Docker Hub
-`sudo docker push username/imagename`
+`sudo docker push [username/imagename]`
 
 #### Remove Docker Image
 `sudo docker rmi [imageName]`
@@ -114,14 +114,14 @@ sudo docker logs -f -t [containerID]
 - Note that docker containers are only active so long as the command you specify is active.
 
 #### Interactive Container
-`sudo docker run -t -i ubuntu /bin/bash`
+`sudo docker run -t -i [imagename] /bin/bash`
 
 - **-t** assigns a pseudo-tty or terminal inside our new container
 - **-i** flag allows us to make an interactive connection by grabbing the standard in STDIN of the container
 - **/bin/bash** also launches a bash shell inside our container
 
 #### Run a Container in Background
-`sudo docker run -d ubuntu /bin/sh -c “while true;do echo hello world; sleep 1; done”`
+`sudo docker run -d [imagename] /bin/sh -c “while true;do echo hello world; sleep 1; done”`
 
 - **-d** tells Docker to run the container and put it in the background, to “daemonize” it
 - note that after you run this, you will not see the output but Docker will rather give you the **Container ID**.
@@ -130,7 +130,7 @@ sudo docker logs -f -t [containerID]
 - to stop running the container, `sudo docker stop [containerIDorName]`. Note that there is a default timer of 10 seconds before the command will actually execute - a grace period just in case you want to change your mind. To override this, use `sudo docker stop -t 0 [containerID]`
 
 #### Run and Name a Container
-`sudo docker run --name my_app_name ubuntu /bin/echo ‘Hello World’`
+`sudo docker run --name [containerName] [imageName] /bin/echo ‘Hello World’`
 
 #### Execute a Command in a Running Container
 `sudo docker exec [containerID] /bin/bash`
