@@ -33,13 +33,18 @@ A summary of commands I have come across to. Could be a cheatsheet in the future
 #### Pull and Cache Images from Remote
 `sudo pull [imageName:tag]`
 
-```
-# here, we pull ubuntu v14.04
-sudo pull ubuntu:14.04
-```
-
 - note that if you do `docker run ubuntu ...` it will run this command if you do not have ubuntu stored locally
 - it is recommended to pull with a specific tag
+
+Example
+
+```
+# search for ubuntu
+sudo docker search ubuntu
+
+# pull ubuntu v14.04
+sudo pull ubuntu:14.04
+```
 
 ### Modifying an Image
 ---
@@ -51,8 +56,31 @@ Note that to modify an image, you have to create an instance of that image as a 
 
 - note that `.` assumes there is an existing Dockerfile
 
+Example
+
+```
+# create docker file
+touch Dockerfile
+
+# Sample Dockerfile Contents:
+# More on: https://docs.docker.com/reference/builder/
+# FROM ubuntu
+# RUN \
+#   apt-get update && \
+#   apt-get install -y python python-dev python-pip python-virtualenv && \
+#   rm -rf /var/lib/apt/lists/*
+# # working dir
+# WORKDIR /data
+# # default command
+# CMD [“bash”]
+
+sudo docker build -t jancarloviray/python
+```
+
 #### Checking Diff
 `sudo docker diff [containerID]`
+
+- This shows file changes/additions/deletions
 
 #### Commit Changes to an Image
 `sudo docker commit -m ‘Added nodejs’ -a ‘John Doe’ [containerID] [username/new_name:custom_tag]`
