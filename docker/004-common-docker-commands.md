@@ -67,27 +67,41 @@ Note that to modify an image, you have to create an instance of that image as a 
 #### List Containers
 ```
 # list only running containers
+# ----------------------------
+
 sudo docker ps
 
 # list all container
+# ------------------
+
 sudo docker ps -a
 
 # show recently created container
+# ----------------------------
+
 sudo docker ps -l
 
 # display file sizes (of all containers)
+# ----------------------------
+
 sudo docker ps -a -s
 ```
 
 #### View Container Logs
 ```
 # View Container Log
+# ------------------
+
 sudo docker logs [containerID]
 
 # View and Tail Container Log
+# ---------------------------
+
 sudo docker logs -f [containerID]
 
 # Also show Timestamps
+# --------------------
+
 sudo docker logs -f -t [containerID]
 ```
 
@@ -165,6 +179,57 @@ This means that Docker has exposed port 5000 (default python flask port) on port
 - Note that you can run the **-p** flag multiple times to configure multiple ports
 
 ### Managing Container Data
+
+#### Data Volumes
+
+A *data volume* is a specially-designated directory within one or more containers that bypasses the Union File System to provide the following features:
+
+- Volumes are initialized when a container is created
+- Data volumes can be shared and reused between containers
+- Changes to a data volume are made directly
+- **Changes to a data volume will not be included when you update an image**
+- **Volumes persist until no containers use them**
+
+```bash
+# Adding a Data Volume
+# --------------------
+# sudo docker run -d -P --name [newName] \
+# -v [volumeName] [imageName] [commandToExecute]
+#
+# Use the `-v` flag with `docker create` 
+# or `docker run` command
+# Note that you can use it multiple times 
+# to mount multiple data volumes
+# The following code will create a new volume 
+# inside a container at `/webapp`
+
+sudo docker run -d -P --name web -v /webapp training/webapp python appy.py
+
+# Mount a Host Directory as a Data Volume
+# ---------------------------------------
+#
+# sudo docker run -d -P --name [newName] \
+# -v [/dir/from/host]:[/dir/in/cont] \
+# [imageName] [commandToExecute] 
+#
+# `-v` flag is also used to mount a directory from 
+# your Docker daemon’s host into a container.
+# Note that if you are using Boot2Docker, it only 
+# has limited access to your /Users directory
+# so, you mount it like this: 
+# `sudo docker run -v /Users/<path>:/<containerPath>`
+# The following will mount the host directory, 
+# /src/webapp into the container at /opt/webapp.
+# NOTE: if the path /opt/webapp already exists 
+# inside the container’s image, its contents will
+# be replaced by the contens of /src/webapp on 
+# the host to stay consistent with the expected
+# behavior of `mount`
+
+sudo docker run -d -P --name web -v /src/webapp:/opt/webapp training/webapp python app.py
+```
+
+Some notes about Data Volumes:
 
 ### Misc Commands
 
