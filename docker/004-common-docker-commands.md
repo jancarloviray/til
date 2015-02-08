@@ -39,16 +39,27 @@ A summary of commands I have come across to. Could be a cheatsheet in the future
 
 - note that `.` assumes there is an existing Dockerfile
 
+### Modifying an Image
+---
+
+Note that to modify an image, you have to create an instance of that image as a container. You must then run the container, then do your modifications then on. Similar to Git, you have to “commit” your changes. This will “save” the changes you made on that container into the origin image. Then you can push it to docker hub.
+
+#### Checking Diff
+`sudo docker diff [containerID]`
+
+#### Commit Changes to an Image
+`sudo docker commit -m ‘Added nodejs’ -a ‘John Doe’ [containerID] username/new_image_name:custom_tag`
+
 #### Setting Tag on Existing Images
 `sudo docker tag [containerID] username/imagename:newtag`
-
-- i think this is better than creating new image names per commit
 
 #### Push Image to Docker Hub
 `sudo docker push username/imagename`
 
 #### Remove Docker Image
-`sudo docker rmi username/imagename`
+`sudo docker rmi [imageName]`
+
+- note that this is different than `sudo docker rm [containerName]` which removes a container
 
 ### Container Information
 ---
@@ -121,15 +132,6 @@ sudo docker logs -f -t [containerID]
 
 #### Removing a Container
 `sudo docker rm [containerID]`
-
-### Modifying a Container
----
-
-#### Checking Diff
-`sudo docker diff [containerID]`
-
-#### Commit Changes to Container
-`sudo docker commit -m ‘Added nodejs’ -a ‘John Doe’ [containerID] new/image_name:custom_tag`
 
 ### Container Networking
 ---
