@@ -20,7 +20,7 @@ A summary of commands I have come across to. Could be a cheatsheet in the future
 #### Check Docker Version
 `sudo docker version`
 
-### Images
+### Image Info
 ---
 
 #### List Locally Saved Images
@@ -34,15 +34,15 @@ A summary of commands I have come across to. Could be a cheatsheet in the future
 #### Search For Available Images
 `sudo docker search [imageName]`
 
-#### Build an Image
-`sudo docker build -t username/imagename:tag .`
-
-- note that `.` assumes there is an existing Dockerfile
-
 ### Modifying an Image
 ---
 
 Note that to modify an image, you have to create an instance of that image as a container. You must then run the container, then do your modifications then on. Similar to Git, you have to “commit” your changes. This will “save” the changes you made on that container into the origin image. Then you can push it to docker hub.
+
+#### Build an Image
+`sudo docker build -t username/imagename:tag .`
+
+- note that `.` assumes there is an existing Dockerfile
 
 #### Checking Diff
 `sudo docker diff [containerID]`
@@ -83,7 +83,7 @@ sudo docker ps -l
 sudo docker ps -a -s
 ```
 
-#### View Container Logs
+#### View Container Logs/Outputs
 ```bash
 # View Container Log
 # ------------------
@@ -104,7 +104,7 @@ sudo docker logs -f -t [containerID]
 ### Container Actions
 ---
 
-#### Run a Command and Activate a Container 
+#### Run a Command and Activate a Container
 `sudo docker run ubuntu /bin/echo ‘Hello world’`
 
 - first, we specified the **Docker** binary and the command we wanted to execute, **run**. Note that the **docker run** combination runs the container.
@@ -112,7 +112,7 @@ sudo docker logs -f -t [containerID]
 - Next is the command we run inside the container. 
 - Note that docker containers are only active so long as the command you specify is active.
 
-#### Interactive Container  
+#### Interactive Container
 `sudo docker run -t -i ubuntu /bin/bash`
 
 - **-t** assigns a pseudo-tty or terminal inside our new container
