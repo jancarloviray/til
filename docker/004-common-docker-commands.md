@@ -24,16 +24,22 @@ A summary of commands I have come across to. Could be a cheatsheet in the future
 ### Image Info
 ---
 
+#### Search For Available Images
+`sudo docker search [imageName]`
+
 #### List Locally Saved Images
 `sudo docker images`
 
 #### Pull and Cache Images from Remote
 `sudo pull [imageName:tag]`
 
-- note that if you do `docker run ubuntu ...` it will run this command if you do not have ubuntu stored locally
+```
+# here, we pull ubuntu v14.04
+sudo pull ubuntu:14.04
+```
 
-#### Search For Available Images
-`sudo docker search [imageName]`
+- note that if you do `docker run ubuntu ...` it will run this command if you do not have ubuntu stored locally
+- it is recommended to pull with a specific tag
 
 ### Modifying an Image
 ---
