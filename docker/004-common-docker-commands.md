@@ -153,4 +153,5 @@ This means that Docker has exposed port 5000 (default python flask port) on port
 #### Expose Container Port to Host Manually
 `sudo docker run -d -p 5000:5000 training/webapp python app.py`
 
-This maps container port 5000 to host port 5000.
+- This maps container port 5000 to host port 5000.
+- Note that you can run the **-p** flag multiple times to configure multiple ports
