@@ -174,6 +174,8 @@ This means that Docker has exposed port 5000 (default python flask port) on port
 
 ### Managing Container Data
 
+Note that containers persist until you remove them with `docker rm [container]`. Until then, the container (an ‘instance’ of an ‘image’ per se) will continue to exist, and can be started, stopped, restarted and etc.
+
 #### Data Volumes
 
 A *data volume* is a specially-designated directory within one or more containers that bypasses the Union File System to provide the following features:
