@@ -124,6 +124,12 @@ sudo docker logs -f -t [containerID]
 #### Run and Name a Container
 `sudo docker run --name my_app_name ubuntu /bin/echo ‘Hello World’`
 
+#### Execute a Command in a Running Container
+`sudo docker exec [containerID] /bin/bash`
+
+#### Attach a Terminal in a Running Container
+`sudo docker exec -it [containerID] /bin/bash`
+
 #### Stop a Container Running in Background
 `sudo docker stop [containerID]`
 
@@ -157,3 +163,19 @@ This means that Docker has exposed port 5000 (default python flask port) on port
 
 - This maps container port 5000 to host port 5000.
 - Note that you can run the **-p** flag multiple times to configure multiple ports
+
+### Managing Container Data
+
+### Misc Commands
+
+```
+# quick install docker in linux
+curl -sSL https://get.docker.com/ | sh
+
+# kill all running containers
+# note that -q stands for quiet, just show ids
+sudo docker kill $(docker ps -q)
+
+# delete stopped container
+sudo docker rm -v `docker ps -a -q -f status=exited`
+```
