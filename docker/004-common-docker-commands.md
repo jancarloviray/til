@@ -65,43 +65,36 @@ Note that to modify an image, you have to create an instance of that image as a 
 ---
 
 #### List Containers
-```
+```bash
 # list only running containers
 # ----------------------------
-
 sudo docker ps
 
 # list all container
 # ------------------
-
 sudo docker ps -a
 
 # show recently created container
 # ----------------------------
-
 sudo docker ps -l
 
 # display file sizes (of all containers)
 # ----------------------------
-
 sudo docker ps -a -s
 ```
 
 #### View Container Logs
-```
+```bash
 # View Container Log
 # ------------------
-
 sudo docker logs [containerID]
 
 # View and Tail Container Log
 # ---------------------------
-
 sudo docker logs -f [containerID]
 
 # Also show Timestamps
 # --------------------
-
 sudo docker logs -f -t [containerID]
 ```
 
@@ -193,6 +186,7 @@ A *data volume* is a specially-designated directory within one or more container
 ```bash
 # Adding a Data Volume
 # --------------------
+#
 # sudo docker run -d -P --name [newName] \
 # -v [volumeName] [imageName] [commandToExecute]
 #
@@ -229,11 +223,9 @@ sudo docker run -d -P --name web -v /webapp training/webapp python appy.py
 sudo docker run -d -P --name web -v /src/webapp:/opt/webapp training/webapp python app.py
 ```
 
-Some notes about Data Volumes:
-
 ### Misc Commands
 
-```
+```bash
 # quick install docker in linux
 curl -sSL https://get.docker.com/ | sh
 
