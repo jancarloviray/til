@@ -6,11 +6,12 @@ A summary of commands I have come across to. Could be a cheatsheet in the future
 
 ## Tips
 
-- You can replace [containerID] with [containerName]
-- You only typically need 3 characters from [containerID]
-- Append --help if you want more information about the command
-- Note that Containers are not the same as Images. Containers are the instances.
+- You can replace [containerID] with [containerName]. You only typically need 3 characters from [containerID]
+- Append --help if you want more information about the command, like `docker run --help`
+- Note that Containers are not the same as Images. Containers are like instances.
 - If you are using boot2docker, it might cause some issues such as docker server being unresponsive. Restart boot2docker with `boot2docker restart` to fix issues such as DNS and etc.
+- Containers are process-driven, so once the process is done, it will exit (this might take a while to get used to).
+- to “enter” a container that is currently running in the background as a daemon, run `docker exec -it [container] /bin/bash`
 
 ## Commands
 
