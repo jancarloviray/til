@@ -52,10 +52,6 @@ apt-get update
 apt-get -y install build-essential libssl-dev software-properties-common
 apt-get -y install curl wget vim man htop unzip git zsh tmux
 
-# configure locale
-sudo locale-gen en_US en_US.UTF-8
-dpkg-reconfigure locales 
-
 # change default shell to zsh
 chsh -s /usr/bin/zsh
 
@@ -66,6 +62,12 @@ nvm install stable && npm alias default stable
 
 # install oh-my-zsh
 curl -L http://install.ohmyz.sh | sh
+
+# configure locale (for bad char encoding fixes)
+sudo locale-gen en_US en_US.UTF-8
+dpkg-reconfigure locales
+apt-get install language-pack-en-base
+echo ‘export LC_ALL=”en_US.UTF-8”’ >> ~/.zshrc
 
 # (/inside container) -------------------------
 
