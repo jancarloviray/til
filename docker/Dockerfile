@@ -1,5 +1,5 @@
 # base image
-FROM debian
+FROM ubuntu
 
 # author
 MAINTAINER Jan Carlo Viray <virayjancarlo@yahoo.com>
@@ -18,35 +18,32 @@ RUN apt-get update && apt-get install -y \
     zsh \
     tmux
 
-# Configure Locale to UTF8
-# for character encoding fixes
-
-RUN locale-gen en_US en_US.UTF8
-RUN dpkg-reconfigure locales
-RUN echo 'export LC_ALL="en_US.UTF-8"' >> {~/.bashrc,~/.zshrc}
-
 # Install NVM (node version manager)
-# and activate it with latest node stable
-# https://github.com/creationix/nvm
+RUN curl https://raw.githubusercontent.com/creationix/nvm/v0.23.3/install.sh | bash 
 
-RUN git clone https://github.com/creationix/nvm.git ~/.nvm \
-    && cd ~/.nvm \
-    && git checkout `git describe --abbrev=0 --tags` \
-    && source ~/.nvm/nvm.sh \
-    && source ~/.profile
-RUN nvm install stable && nvm alias default stable
-RUN echo 'source ~/.nvm/nvm.sh' >> {~/.bashrc,~/.zshrc}
-
-# Change default shell to zsh
-
-RUN chsh -s /usr/bin/zsh
+# Run ~/.nvm/nvm.sh on next and every shell start
+RUN echo 'source ~/.nvm/nvm.sh' >> ~/.bashrc
+RUN echo 'source ~/.nvm/nvm.sh' >> ~/.zshrc
 
 # Install oh-my-zsh
-# https://github.com/robbyrussell/oh-my-zsh
+RUN curl -L http://install.ohmyz.sh | zsh
 
-RUN curl -L http://install.ohmyz.sh | sh
+# Configure Locale to UTF8
+# RUN sudo locale-gen en_US
+# RUN sudo locale-gen en_US.UTF-8
+# RUN dpkg-reconfigure locales
+RUN echo 'export LC_ALL="en_US.UTF-8"' >> ~/.bashrc
+RUN echo 'export LC_ALL="en_US.UTF-8"' >> ~/.zshrc
+RUN echo 'export LANGUAGE="en_US.UTF-8"' >> ~/.bashrc
+RUN echo 'export LANGUAGE="en_US.UTF-8"' >> ~/.zshrc
 
-# make docker image smaller
+# Restart shell then run nvm to install latest stable node
+RUN #! /bin/bash ~/.bashrc && nvm install stable && nvm alias default stable
+
+# Change default shell to zsh
+RUN chsh -s /usr/bin/zsh
+
+# # make docker image smaller
 RUN apt-get clean autoclean
 RUN apt-get clean autoremove -y
 RUN rm -rf /var/lib{apt,dpkg,cache,log}
