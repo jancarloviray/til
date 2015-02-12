@@ -36,7 +36,6 @@ RUN apt-get update && apt-get install -y \
     cmake \
     python-dev \
     silversearcher-ag
-RUN echo 'test'
 RUN git clone https://github.com/jancarloviray/spf13-vim.git ~/spf13-vim
 RUN /bin/bash ~/spf13-vim/bootstrap.sh
 RUN cp ~/spf13-vim/.vimrc.local ~/ && cp ~/spf13-vim/.vimrc.bundles.local ~/
@@ -79,7 +78,7 @@ RUN echo 'export TERM="xterm-256color"' >> ~/.zshrc
 
 # source: not found fix
 # http://stackoverflow.com/questions/20635472/using-the-run-instruction-in-a-dockerfile-with-source-does-not-work
-RUN rm /bin/sh && ln -s /bin/bash /bin/sh
+# RUN rm /bin/sh && ln -s /bin/bash /bin/sh
 
 # TODO AFTER:
 # RUN source ~/.bashrc
