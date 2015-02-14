@@ -1,4 +1,4 @@
-# IMPORTANT: order here matters
+# TODO: this is quite an anti-pattern Dockerfile.. refactor-candidate
 
 # base image
 FROM ubuntu:14.04
