@@ -1,10 +1,10 @@
 # ES7 Async and Await
 
-Promises have been the current solution to the "callback hell" but starting from ES6, and now ES7 it is being tucked behind the scenes (while still being a major foundation) to pave way for `async` and `await`.
+Promises have been the predominant solution to the "callback hell" issue with JavaScript, but starting with ES6, and now ES7 it is slowly being tucked behind the scenes to pave way for `async` and `await`.
 
-Currently, "callback hell" can be mitigated by use of libraries such as [async](https://github.com/caolan/async) or by using generators as popularized by [koa](http://koajs.com/). But they both kind of have been in the realm of hacks/helpers.
+Currently, "callback hell" can be mitigated by use of libraries such as [async](https://github.com/caolan/async) or by using generators as popularized by [koa](http://koajs.com/). But they both kind of have been in the realm of hacks/helpers just masking the fundamental issue.
 
-With ES7 we will be able to write our asynchronous code as if it were synchronous.
+With ES7 we will be able to write our asynchronous code as if it were synchronous in a less hacky way.
 
 > Note that you can already start using modern and future-oriented features by using [babel](babeljs.io)
 
@@ -22,7 +22,7 @@ async function run(){
 }
 ```
 
-The `async` keyword allows us to use `await` and it GUARANTEES that the function will return a `Promise`. When you return from an async function, you will return a `Promise` object that is resolved with the value. To reject, throw an error, which will return an error object.
+The `async` keyword allows us to use `await` and it GUARANTEES that the function will return a `Promise` with either the resolved or rejected state. When you return from an async function, you will return a `Promise` object that is resolved with the value. To reject, throw an error, which will return an error object.
 
 The code block above is essentially the same as:
 
@@ -48,7 +48,7 @@ async function get(value){
 
 Now, the **await** keyword.
 
-While inside the async function, on expressions that return a promise, you can add in the `await` keyword and **it will pause the execution of the rest of the function UNTIL the returned promise has been resolved or rejected**. Check out this example:
+While inside the async function, promise-returning expressions can be added with the `await` keyword. By doing so, **it will pause the execution of the rest of the function UNTIL the returned promise has been resolved or rejected**. Check out this simple example:
 
 ```javascript
 function op(){
@@ -59,7 +59,7 @@ function op(){
             }else{
                 reject('Fail')
             }
-        },1000)
+        },2000)
     });
 }
 
@@ -76,7 +76,7 @@ async function foo(){
 foo()
 ```
 
-When you call `foo()` it will wait for 1000 ms and either resolve or reject. Notice the try/get. Now we can catch errors.
+When you call `foo()` it will wait for 2000 ms and either resolve or reject. Notice the try/get. Now we can catch errors.
 
 ## Conclusion
 
