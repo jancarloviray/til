@@ -1,29 +1,34 @@
 # Vagrant Overview
--------------
 
-```bash
-# vagrant box management (self-explanatory)
-# note that boxes are globally per user (~/.vagrant.d)
-vagrant box add puphpet/debian75-x64
-vagrant box list
-vagrant box remove
+Vagrant provides easy to configure, reproducible, and portable work environments controlled by a single consistent workflow to help maximize the productivity and flexibility of you and your team. If you're a developer, Vagrant will isolate dependencies and their configuration within a single disposable, consistent environment, without sacrificing any of the tools you're used to working with (editors, browsers, debuggers, etc.). Once you or someone else creates a single Vagrantfile, you just need to vagrant up and everything is installed and configured for you to work. To get started, download these dependencies: [Vagrant](http://www.vagrantup.com/downloads) and [VirtualBox](https://www.virtualbox.org/)
 
-# Once you have the Vagrantfile set up, time to initialize.
-# This will run the VM in a headless state (as VBoxHeadless process)
+## Quick Start
+
+```shell
+vagrant init hashicorp/precise32
 vagrant up
-
-# tells what machine is running
-vagrant status
-
-# ssh
-vagrant ssh
-
-# by default Vagrant shares the project directory
-# (dir with the Vagrantfile) to /vagrant inside the virtual machine
-cd /vagrant/
 ```
 
-# VirtualBox Configurations
+## Sample Working Vagrantfile
+---------------
+
+Create a file and call it Vagrantfile
+
+```ruby
+Vagrant.configure(2) do |config|
+	config.vm.box = "precise64"
+	config.vm.network :forwarded_port, guest: 80, host: 8800
+	config.vm.provision "shell", path: "provision.sh"
+end
+```
+
+Once you have that, run this command
+
+```shell
+vagrant up
+```
+
+## VirtualBox Configurations
 ----------------------
 
 ```ruby
@@ -48,7 +53,7 @@ Vagrant.configure(2) do |config|
 end
 ```
 
-# Sharing Directories
+## Sharing Directories
 ----------------
 
 `config.vm.synced_folder "host/relative/path", "/guest/absolute/path"`
@@ -87,7 +92,7 @@ end
 vagrant reload
 ```
 
-# Networking
+## Quick Networking Sample
 -------
 
 ```ruby
@@ -98,7 +103,7 @@ Vagrant.configure(2) do |config|
 end
 ```
 
-# Teardown
+## Teardown
 -----
 
 ```bash
@@ -112,7 +117,7 @@ vagrant halt
 vagrant destroy
 ```
 
-# Writing Shell Scripts for Provisioning
+## Writing Shell Scripts for Provisioning
 -----------------------------------
 
 ```ruby
@@ -133,18 +138,9 @@ rm -rf /var/www
 ln -fs /vagrant /var/www
 ```
 
-# Sample Vagrantfile
----------------
 
-```ruby
-Vagrant.configure(2) do |config|
-	config.vm.box = "precise64"
-	config.vm.network :forwarded_port, guest: 80, host: 8800
-	config.vm.provision "shell", path: "provision.sh"
-end
-```
 
-# Networking In-Depth
+## Networking In-Depth
 ----------------
 
 Note that it is possible to compose networking options, so long as the guest machine has room for additional network interfaces. For example:
@@ -158,7 +154,7 @@ config.vm.network "private_network", ip: "192.168.33.10"
 
 Also, note that with VirtualBox, Vagrant requires the first network device attached to the virtual machine to be a NAT device. Therefore, any host-only or bridged networks will be added as additional network devices and exposed to the virtual machine as "eth1", "eth2" and etc. "eth0" is generally always the NAT device. Note that it is not possible to override this requirement.
 
-## Forwarded Ports
+### Forwarded Ports
 
 ```ruby
 Vagrant.configure(2) do |config|
@@ -185,7 +181,7 @@ Finally, with VirtualBox, Vagrant can't forward to ports less than 1024 on the h
 
 By default, forwarded ports only work with TCP connections. If you need to forward UDP packets as well, you have to configure an additional forwarded port with UDP port forwarding, ie: `config.vm.network :forwarded_port, guest: 80, host: 8800, protocol: "udp"`
 
-## Host-Only Networking (Private Network)
+### Host-Only Networking (Private Network)
 
 With private network, you can do the following:
 
@@ -222,7 +218,7 @@ A benefit of this however is that multiple virtual machines can communicate with
 
 In addition, *the virutal machine can also communicate with the host itself.*
 
-# Running Multiple Virtual Machines
+## Running Multiple Virtual Machines
 ------------------------------
 
 This brings up two virtual machines. Note that you must destroy existing virtual machines from this project first before you do initialize this new Vagrantfile.
@@ -267,7 +263,7 @@ mysql -u root mysql <<< "GRANT ALL ON*.* TO 'root'@'%'; FLUSH PRIVILEGES;"
 
 Remember to run `vagrant destroy` to start with a clean slate. Now, run `vagrant ssh web`
 
-# Packaging Boxes
+## Packaging Boxes
 ------------
 
 `vagrant package`
